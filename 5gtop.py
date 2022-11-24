@@ -1618,6 +1618,7 @@ parser.add_argument('-g', '--generation', type=int, required=False, help = "4 fo
 parser.add_argument('-u', '--user',       type=str, required=False, help = F"Admin user name for modem, (optional, defaults to '{stg.user}')")
 args = parser.parse_args()
 
+
 atexit.register(cleanup_curses)
 signal.signal(signal.SIGINT, signal_handler)
 
