@@ -1,2 +1,0 @@
-huawei-lte-api
-icmplib
