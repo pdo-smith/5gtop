@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 #-*- coding: utf-8 -*-
 
 """
@@ -29,13 +29,13 @@ Acknowledgements
 
 
 
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 
 class Settings(object):
     def __init__(self,**kwargs):
         self.__dict__.update(kwargs)
         
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 
 stg = Settings()
 stg.version   = "1.0.0"
@@ -47,9 +47,9 @@ stg.rsrq_min  = -34.0
 stg.heartbeat = 10.0
 stg.user      = 'admin'
 
-#------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------
 # Setup logging
-#------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
@@ -64,7 +64,7 @@ logger.setLevel(logging.INFO)
 
 logger.info('Program startup')
 
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 
 import importlib.util
 import sys,os,subprocess,time
@@ -73,7 +73,7 @@ import platform
 #$(cat "/proc/$PPID/comm")
 #res = subprocess.run(['cat', '/proc/$PPID/comm'], capture_output=True, text=True).stdout
 
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 
 def check_linux_requirements():
     
@@ -148,7 +148,7 @@ def check_linux_requirements():
     else:
         logger.info("All requirements for 5gtop were satisfied")
 
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 
 def check_windows_requirements():
 
@@ -206,7 +206,7 @@ def check_windows_requirements():
     else:
         logger.info("All requirements for 5gtop in Windows were satisfied")
     
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 
 if platform.system() == "Linux":
     check_linux_requirements()
@@ -253,9 +253,9 @@ elif platform.system() == "Windows":
     cmd = F'mode con: cols={stg.win_width} lines={stg.win_height}'
     os.system(cmd)
 
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 # Format dump data
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 def dump(method: Callable[[], Any]) -> None:
     #print("==== %s" % method.__qualname__)
     try:       
@@ -266,7 +266,7 @@ def dump(method: Callable[[], Any]) -> None:
         #dprint(F"Error on line {format(sys.exc_info()[-1].tb_lineno)}, {type(e).__name__}, {e}",2)
     #print("")
 
-#-----------------------------------------------------------------------
+# -----------------------------------------------------------------------
 
 def dump_data():
         global mdm
