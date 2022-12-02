@@ -1,5 +1,6 @@
 About 5gtop
 ===========
+![](screenshot.jpg)
 
 This program monitors the signal performance of Huawei 4G/5G modems.
 It uses the Salamek huawei-lte API, and is written in Python 3.
