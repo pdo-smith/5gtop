@@ -840,9 +840,9 @@ class ScanModem(Thread) :
                     else:
                         mdm.status = 'Modem online'
                     heartbeat_event.set()
-                               
-                mdm.download = int(traffic['CurrentDownloadRate'])*8//(1024*1024)
-                mdm.upload = int(traffic['CurrentUploadRate'])*8//(1024*1024)
+
+                mdm.download = int(traffic['CurrentDownloadRate'])*8/(1024*1024)
+                mdm.upload = int(traffic['CurrentUploadRate'])*8/(1024*1024)
 
                 mdm.device_name = basic['devicename']
 
@@ -1058,9 +1058,9 @@ def monitor_modem():
                         
                     #reset the heartbeat--------------------------------
                     heartbeat_event.set()
-                               
-                mdm.download = int(traffic['CurrentDownloadRate'])*8//(1024*1024)
-                mdm.upload = int(traffic['CurrentUploadRate'])*8//(1024*1024)
+
+                mdm.download = int(traffic['CurrentDownloadRate'])*8/(1024*1024)
+                mdm.upload = int(traffic['CurrentUploadRate'])*8/(1024*1024)
 
                 mdm.device_name = basic['devicename']
 
@@ -1309,15 +1309,15 @@ class DisplayData(Thread) :
                             plmn_value = '----'
                         stdscr.addstr(y, 25, plmn_value, curses.color_pair(1)|curses.A_BOLD)
                         y += 2
-                        stdscr.addstr(y, 1, "Download :     " + str(mdm.download) + '  ', curses.color_pair(1))
-                        stdscr.addstr(y, 16, F"{mdm.download} ", curses.color_pair(1)|curses.A_BOLD)
-                        stdscr.addstr(y, 20, " Mbit/s", curses.color_pair(1))
-                        stdscr.addstr(y, 28, dash[0 : mdm.download % 100], curses.color_pair(2)|curses.A_BOLD)
+                        stdscr.addstr(y, 1, "Download :     ", curses.color_pair(1))
+                        stdscr.addstr(y, 16, F"{mdm.download:.02f} ", curses.color_pair(1)|curses.A_BOLD)
+                        stdscr.addstr(y, 22, " Mbit/s", curses.color_pair(1))
+                        stdscr.addstr(y, 30, dash[0 : int(mdm.download) % 100], curses.color_pair(2)|curses.A_BOLD)
                         y += 1
                         stdscr.addstr(y, 1, "Upload :       ", curses.color_pair(1))
-                        stdscr.addstr(y, 16, F"{mdm.upload} ", curses.color_pair(1)|curses.A_BOLD)
-                        stdscr.addstr(y, 20, " Mbit/s", curses.color_pair(1))
-                        stdscr.addstr(y, 28, dash[0 : mdm.upload % 100], curses.color_pair(3)|curses.A_BOLD) 
+                        stdscr.addstr(y, 16, F"{mdm.upload:.02f} ", curses.color_pair(1)|curses.A_BOLD)
+                        stdscr.addstr(y, 22, " Mbit/s", curses.color_pair(1))
+                        stdscr.addstr(y, 30, dash[0 : int(mdm.upload) % 100], curses.color_pair(3)|curses.A_BOLD) 
                         y += 2
 
                         stdscr.addstr(y, 1, "Month used :   " + str(mdm.data_used), curses.color_pair(1))
@@ -1361,7 +1361,7 @@ class DisplayData(Thread) :
                 except:
                     plmn_value = "----"
                 log_str1 = F"{mdm.plmn} {plmn_value} {mdm.cell_id[10:]} {mdm.bars} bars "
-                log_str2 = F"{png.time:6.1f} ms {mdm.rsrp} dBm {mdm.rsrq} dB {mdm.sinr} dB {mdm.today_used:6d} Mbyte {mdm.download:4d} Mbit/s"
+                log_str2 = F"{png.time:6.1f} ms {mdm.rsrp} dBm {mdm.rsrq} dB {mdm.sinr} dB {mdm.today_used:6d} Mbyte {mdm.download:.02f} Mbit/s"
                 logger.info(log_str1 + log_str2)
                 
                 cycle += 1
